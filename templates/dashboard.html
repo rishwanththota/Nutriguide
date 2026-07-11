@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard | NutriGuide</title>
+</head>
+<body><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriGuide Dashboard</title>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f3f9f5;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Navbar */
+  .navbar {
+    background-color: #2e7d32;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+
+  /* Dashboard container */
+  .dashboard {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-gap: 20px;
+  }
+
+  /* Info cards */
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .card h2 {
+    color: #388e3c;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  /* Chart container */
+  .chart-container {
+    margin: 40px auto;
+    width: 80%;
+    max-width: 600px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px;
+    background: #2e7d32;
+    color: white;
+    margin-top: 30px;
+  }
+</style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>🌿 NutriGuide </h1>
+    <div>
+      <nav>
+ <a href="dashboard.html">Dashboard</a>
+ <a href="caluclator.html">Tracker</a>
+ <a href="mealplan.html">Meal Plan</a>
+ <a href="about.html">About</a>
+ <a href="contact.html">Contact</a>
+ <a href="logout.html">Logout</a>
+</nav>
+
+    </div>
+  </div>
+
+  <!-- Dashboard Summary -->
+  <div class="dashboard">
+    <div class="card">
+      <h2>Total Calories</h2>
+      <p id="calories">-- kcal</p>
+    </div>
+    <div class="card">
+      <h2>Protein</h2>
+      <p id="protein">-- g</p>
+    </div>
+    <div class="card">
+      <h2>Carbs</h2>
+      <p id="carbs">-- g</p>
+    </div>
+    <div class="card">
+      <h2>Fats</h2>
+      <p id="fats">-- g</p>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-container">
+    <canvas id="macroChart"></canvas>
+  </div>
+
+  <footer>
+    © 2025 NutriGuide | Healthy Living Starts Here 🌱
+  </footer>
+
+  <script>
+    // Example data (you can replace this with real user data)
+    const nutritionData = {
+      calories: 2500,
+      protein: 150,
+      carbs: 300,
+      fats: 70
+    };
+
+    // Display data in cards
+    document.getElementById("calories").innerText = nutritionData.calories + " kcal";
+    document.getElementById("protein").innerText = nutritionData.protein + " g";
+    document.getElementById("carbs").innerText = nutritionData.carbs + " g";
+    document.getElementById("fats").innerText = nutritionData.fats + " g";
+
+    // Chart.js Nutrient Breakdown
+    const ctx = document.getElementById("macroChart");
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Protein", "Carbs", "Fats"],
+        datasets: [{
+          data: [nutritionData.protein, nutritionData.carbs, nutritionData.fats],
+          backgroundColor: ["#66bb6a", "#ffee58", "#ff7043"],
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Macronutrient Distribution",
+            font: { size: 18 }
+          },
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
+    });
+  </script>
+<main>
+ <h1>Welcome to Our NutriGuide-personalized diet planner and calorie counter</h1>
+</main>
+</body>
+</html>
