@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriGuide Meal Plan</title>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f6fff9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  header {
+    background-color: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  /* Navbar */
+  .navbar {
+    background-color: #2e7d32;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+
+
+  h1 {
+    margin: 0;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  input, button {
+    padding: 10px;
+    margin: 10px 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    background: #43a047;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #2e7d32;
+  }
+
+  .meal {
+    margin-top: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+
+  .meal h3 {
+    color: #388e3c;
+    margin-bottom: 8px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  li {
+    padding: 5px 0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px;
+    background: #2e7d32;
+    color: white;
+    margin-top: 30px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <h1>🌿 NutriGuide </h1>
+    <div>
+      <nav>
+ <a href="dash.html">Dashboard</a>
+ <a href="caluclator.html">Tracker</a>
+ <a href="mealplan.html">Meal Plan</a>
+ <a href="about.html">About</a>
+ <a href="contact.html">Contact</a>
+ <a href="logout.html">Logout</a>
+</nav>
+
+    </div>
+</header>
+
+<div class="container">
+  <h2>Generate Your Daily Meal Plan</h2>
+  <p>Enter your target calories to get a suggested meal plan:</p>
+
+  <input type="number" id="caloriesInput" placeholder="Enter daily calories (e.g. 2000)">
+  <button onclick="generateMealPlan()">Generate Plan</button>
+
+  <div id="mealPlan"></div>
+</div>
+
+<footer>
+  © 2025 NutriGuide | Eat Smart. Live Better. 🌱
+</footer>
+
+<script>
+const mealDatabase = {
+  breakfast: [
+    { item: "Oatmeal with banana & almonds", calories: 350, protein: 10, carbs: 50, fats: 12 },
+    { item: "Greek yogurt with berries & granola", calories: 300, protein: 15, carbs: 35, fats: 8 },
+    { item: "Whole grain toast with avocado & egg", calories: 320, protein: 14, carbs: 28, fats: 15 }
+  ],
+  lunch: [
+    { item: "Grilled chicken with quinoa & veggies", calories: 500, protein: 35, carbs: 40, fats: 15 },
+    { item: "Tuna salad wrap with spinach", calories: 450, protein: 32, carbs: 35, fats: 13 },
+    { item: "Brown rice bowl with tofu & vegetables", calories: 480, protein: 20, carbs: 60, fats: 10 }
+  ],
+  dinner: [
+    { item: "Baked salmon with sweet potato & greens", calories: 550, protein: 40, carbs: 45, fats: 20 },
+    { item: "Lean beef stir-fry with rice", calories: 600, protein: 42, carbs: 50, fats: 18 },
+    { item: "Lentil curry with basmati rice", calories: 520, protein: 25, carbs: 65, fats: 10 }
+  ],
+  snacks: [
+    { item: "Apple with peanut butter", calories: 200, protein: 5, carbs: 22, fats: 9 },
+    { item: "Protein smoothie", calories: 250, protein: 25, carbs: 20, fats: 6 },
+    { item: "Mixed nuts handful", calories: 180, protein: 6, carbs: 8, fats: 15 }
+  ]
+};
+
+function randomMeal(type) {
+  const options = mealDatabase[type];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function generateMealPlan() {
+  const totalCalories = parseInt(document.getElementById("caloriesInput").value);
+  if (!totalCalories || totalCalories < 1000) {
+    document.getElementById("mealPlan").innerHTML = "<p style='color:red;'>Please enter a valid calorie goal (min 1000).</p>";
+    return;
+  }
+
+  // Distribute calories (25% breakfast, 35% lunch, 30% dinner, 10% snacks)
+  const calorieSplit = {
+    breakfast: totalCalories * 0.25,
+    lunch: totalCalories * 0.35,
+    dinner: totalCalories * 0.3,
+    snacks: totalCalories * 0.1
+  };
+
+  const breakfast = randomMeal("breakfast");
+  const lunch = randomMeal("lunch");
+  const dinner = randomMeal("dinner");
+  const snack = randomMeal("snacks");
+
+  const planHTML = `
+    <div class="meal">
+      <h3>🍳 Breakfast</h3>
+      <ul><li>${breakfast.item}</li></ul>
+      <p>~${breakfast.calories} kcal | Protein: ${breakfast.protein}g | Carbs: ${breakfast.carbs}g | Fats: ${breakfast.fats}g</p>
+    </div>
+    <div class="meal">
+      <h3>🥙 Lunch</h3>
+      <ul><li>${lunch.item}</li></ul>
+      <p>~${lunch.calories} kcal | Protein: ${lunch.protein}g | Carbs: ${lunch.carbs}g | Fats: ${lunch.fats}g</p>
+    </div>
+    <div class="meal">
+      <h3>🍛 Dinner</h3>
+      <ul><li>${dinner.item}</li></ul>
+      <p>~${dinner.calories} kcal | Protein: ${dinner.protein}g | Carbs: ${dinner.carbs}g | Fats: ${dinner.fats}g</p>
+    </div>
+    <div class="meal">
+      <h3>🥜 Snacks</h3>
+      <ul><li>${snack.item}</li></ul>
+      <p>~${snack.calories} kcal | Protein: ${snack.protein}g | Carbs: ${snack.carbs}g | Fats: ${snack.fats}g</p>
+    </div>
+    <h3 style="text-align:center;">Total Daily Calories: ~${totalCalories} kcal</h3>
+  `;
+
+  document.getElementById("mealPlan").innerHTML = planHTML;
+}
+</script>
+</body>
+</html>
