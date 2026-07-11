@@ -1,0 +1,39 @@
+.contact-icons {
+  text-align: center;
+}
+
+.contact-icons h2 {
+  color: #4a772f;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 28px;
+  color: white;
+  background: #4a772f;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.icon:hover {
+  transform: scale(1.15);
+}
+
+.instagram { background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4); }
+.facebook { background: #1877f2; }
+.linkedin { background: #0077b5; }
+.gmail { background: #d44638; }
+.whatsapp { background: #25D366; }
