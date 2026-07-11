@@ -1,0 +1,128 @@
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<title>NutriGuide</title> 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" 
+rel="stylesheet"> 
+<style> 
+body { 
+margin: 0; 
+font-family: 'Montserrat', sans-serif; 
+background-color: #f9f9f9; 
+color: #333; 
+} 
+header { 
+background-color: #4CAF50; 
+color: white; 
+padding: 1rem 2rem; 
+display: flex; 
+justify-content: space-between; 
+align-items: center; 
+} 
+nav a { 
+color: white; 
+margin: 0 1rem; 
+text-decoration: none; 
+font-weight: bold; 
+} 
+.hero { 
+background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') 
+center/cover no-repeat; 
+
+color: white; 
+padding: 5rem 2rem; 
+text-align: center; 
+} 
+.hero h1 { 
+font-size: 3rem; 
+margin-bottom: 1rem; 
+} 
+.hero p { 
+font-size: 1.2rem; 
+margin-bottom: 2rem; 
+} 
+.hero button { 
+padding: 0.8rem 1.5rem; 
+font-size: 1rem; 
+background-color: #ff9800; 
+border: none; 
+border-radius: 5px; 
+cursor: pointer; 
+color: white; 
+} 
+section { 
+padding: 3rem 2rem; 
+max-width: 1000px; 
+margin: auto; 
+} 
+.features, .recipes, .testimonials { 
+display: grid; 
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+gap: 2rem; 
+} 
+.card { 
+background: white; 
+padding: 1.5rem; 
+border-radius: 10px; 
+box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+} 
+footer { 
+background-color: #333; 
+color: white; 
+text-align: center; 
+padding: 2rem; 
+} 
+</style> 
+</head> 
+<body> 
+27  
+<header> 
+<h2>NutriGuide</h2> 
+<nav> 
+<a href="{{ url_for('login') }}">Login</a> 
+<a href="{{ url_for('register') }}">Sign up</a> 
+</nav> 
+</header> 
+<div class="hero"> 
+<h1>Eat Well. Live Better.</h1> 
+<p>Personalized nutrition plans, expert advice, and delicious recipes — all in one place.</p> 
+<button onclick="window.location.href='/register'">Get Started</button> 
+</a> 
+ 
+</div> 
+ 
+<section> 
+<h2>Why NutriGuide?</h2> 
+<div class="features"> 
+<div class="card">⬛  Personalized Nutrition</div> 
+<div class="card"> Expert-Backed Plans</div> 
+<div class="card"> Delicious Recipes</div> 
+<div class="card">⬛ Progress Tracking</div> 
+</div> 
+</section> 
+ 
+<section> 
+<h2>Featured Recipes</h2> 
+<div class="recipes"> 
+<div class="card">  Avocado Chickpea Salad</div> 
+<div class="card"> Berry Smoothie Boost</div> 
+<div class="card">Quinoa Power Bowl</div> 
+</div> 
+</section> 
+ 
+<section> 
+<h2>Testimonials</h2> 
+<div class="testimonials"> 
+<div class="card">“NutriGuide changed the way I eat and feel.” — Rishwanth</div> 
+<div class="card">“The recipes are amazing and the plans actually work!” — Ashwanth</div> 
+</div> 
+</section> 
+ 
+<footer> 
+<p>© 2025 NutriGuide | Follow us on Instagram, YouTube, Pinterest</p> 
+</footer> 
+</body> 
+</html> 
