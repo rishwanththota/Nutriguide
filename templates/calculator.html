@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition Guide Calculator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f9f6;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  /* Navbar */
+  .navbar {
+    background-color: #2e7d32;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  .container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  input, select, button {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #45a049;
+  }
+  .result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e7f7ef;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+   <!-- Navbar -->
+  <div class="navbar">
+    <h1>🌿 NutriGuide </h1>
+    <div>
+      <nav>
+ <a href="dash.html">Dashboard</a>
+ <a href="caluclator.html">Tracker</a>
+ <a href="mealplan.html">Meal Plan</a>
+ <a href="about.html">About</a>
+ <a href="contact.html">Contact</a>
+ <a href="logout.html">Logout</a>
+</nav>
+
+    </div>
+  </div>
+
+<div class="container">
+  <h2>Nutrition Guide Calculator</h2>
+  <input type="number" id="age" placeholder="Age (years)" required>
+  <select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <input type="number" id="height" placeholder="Height (cm)" required>
+  <input type="number" id="weight" placeholder="Weight (kg)" required>
+  <select id="activity">
+    <option value="1.2">Sedentary</option>
+    <option value="1.375">Lightly active</option>
+    <option value="1.55">Moderately active</option>
+    <option value="1.725">Very active</option>
+    <option value="1.9">Extra active</option>
+  </select>
+  <button onclick="calculateCalories()">Calculate</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateCalories() {
+  const age = parseFloat(document.getElementById("age").value);
+  const gender = document.getElementById("gender").value;
+  const height = parseFloat(document.getElementById("height").value);
+  const weight = parseFloat(document.getElementById("weight").value);
+  const activity = parseFloat(document.getElementById("activity").value);
+
+  if (!age || !height || !weight) {
+    document.getElementById("result").innerHTML = "<b>Please fill in all fields.</b>";
+    return;
+  }
+
+  // Mifflin-St Jeor Equation
+  let bmr;
+  if (gender === "male") {
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+  } else {
+    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+  }
+
+  const calories = Math.round(bmr * activity);
+
+  // Macronutrient distribution
+  const protein = Math.round((0.3 * calories) / 4);
+  const carbs = Math.round((0.5 * calories) / 4);
+  const fats = Math.round((0.2 * calories) / 9);
+
+  document.getElementById("result").innerHTML = `
+    <h3>Your Daily Nutrition Guide</h3>
+    <p><b>Calories Needed:</b> ${calories} kcal/day</p>
+    <p><b>Macronutrient Breakdown:</b></p>
+    <ul style="list-style:none;">
+      <li>Protein: ${protein} g</li>
+      <li>Carbohydrates: ${carbs} g</li>
+      <li>Fats: ${fats} g</li>
+    </ul>
+  `;
+}
+</script>
+<a href="mealplan.html">
+  <button>Get Started</button>
+
+</body>
+</html>
